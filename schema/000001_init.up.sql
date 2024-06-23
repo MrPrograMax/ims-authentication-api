@@ -13,7 +13,11 @@ CREATE TABLE users
 
     CONSTRAINT fk_role
         FOREIGN KEY (role_id)
-            REFERENCES roles(Id)
+            REFERENCES roles(id)
 );
+
+INSERT INTO roles (name) VALUES ('admin');
+INSERT INTO roles (name) VALUES ('manager');
+INSERT INTO roles (name) VALUES ('worker');
 
 
