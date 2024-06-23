@@ -1,11 +1,13 @@
 package models
 
-import "github.com/google/uuid"
-
 type User struct {
-	Id       uuid.UUID `json:"-"`
-	Login    string    `json:"username" binding:"required"`
-	Password string    `json:"password" binding:"required"`
-	Role     string    `json:"role" binding:"required"`
-	Salt     string    `json:"salt" binding:"required"`
+	Id       int64  `json:"-"`
+	Login    string `json:"username" binding:"required" db:"login"`
+	Password []byte `json:"password" binding:"required" db:"password"`
+	Role     int64  `json:"role" binding:"required" db:"role_id"`
+}
+
+type Role struct {
+	Id   int64  `json:"-"`
+	Name string `json:"name" binding:"required" db:"name"`
 }

@@ -4,6 +4,10 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	api "ims-authentication-api"
+	"ims-authentication-api/pkg/handler"
+	"ims-authentication-api/pkg/repository"
+	"ims-authentication-api/pkg/service"
 	"os"
 )
 
@@ -38,7 +42,6 @@ func main() {
 	if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
 		logrus.Fatalf("error of init server: %s", err)
 	}
-
 }
 
 func initConfig() error {

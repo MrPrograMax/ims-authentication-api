@@ -1,14 +1,21 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/jmoiron/sqlx"
+	"ims-authentication-api/models"
+)
 
-type Entity struct {
+type Authorization interface {
+	CreateUser(user models.User) (int64, error)
+	GetUser(login string) (models.User, error)
 }
 
 type Repository struct {
-	Entity
+	Authorization
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
-	return &Repository{}
+	return &Repository{
+		Authorization: NewAuthPostgres(db),
+	}
 }

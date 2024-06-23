@@ -1,25 +1,38 @@
 package repository
 
 import (
-	"database/sql"
+	"github.com/jmoiron/sqlx"
+	"ims-authentication-api/models"
 )
 
 type AuthPostgres struct {
-	db *sql.DB
+	db *sqlx.DB
 }
 
-func NewAuthPostgres(db *sql.DB) *AuthPostgres {
+func NewAuthPostgres(db *sqlx.DB) *AuthPostgres {
 	return &AuthPostgres{db: db}
 }
 
-//func (r *AuthPostgres) CreateUser(user models.User) (int, error) {
-//	var id int
-//	query := fmt.Sprintf("INSERT INTO %s (name, username, password_hash) values ($1, $2, $3) RETURNING id", usersTable)
-//
-//	row := r.db.QueryRow(query, user.Name, user.Username, user.Password)
-//	if err := row.Scan(&id); err != nil {
-//		return 0, err
-//	}
-//
-//	return id, nil
-//}
+func (r *AuthPostgres) CreateUser(user models.User) (int64, error) {
+	insertQuery := "INSERT INTO users (login, password, role_id) VALUES (?, ?, ?)"
+	stmt, err := r.db.Prepare(insertQuery)
+	if err != nil {
+		return 0, err
+	}
+
+	res, err := stmt.Exec(user.Login, user.Password, user.Role)
+	if err != nil {
+		return 0, err
+	}
+
+	return res.LastInsertId()
+}
+
+func (r *AuthPostgres) GetUser(login string) (models.User, error) {
+	var user models.User
+
+	query := "SELECT login, password, role_id FROM users WHERE login = $1"
+	err := r.db.Get(user, query, login)
+
+	return user, err
+}

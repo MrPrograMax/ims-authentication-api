@@ -18,11 +18,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	api := router.Group("/auth")
 	{
-		entities := api.Group("/user")
-		{
-			entities.POST("/sign-up", h.signUp)
-			entities.GET("/sign-in", h.signIn)
-		}
+		api.POST("/sign-up", h.signUp)
+		api.GET("/sign-in", h.signIn)
 	}
 
 	return router
