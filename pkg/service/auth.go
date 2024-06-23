@@ -3,6 +3,7 @@ package service
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
 	"ims-authentication-api/models"
 	"ims-authentication-api/pkg/repository"
@@ -33,7 +34,9 @@ func (s *AuthService) CreateUser(user models.User) (int64, error) {
 		return 0, err
 	}
 
+	logrus.Println(user.Password)
 	user.Password = hash
+	logrus.Println(user.Password)
 
 	return s.repo.CreateUser(user)
 }
@@ -44,7 +47,7 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 		return "", err
 	}
 
-	err = bcrypt.CompareHashAndPassword([]byte(password), user.Password)
+	err = bcrypt.CompareHashAndPassword([]byte(password), []byte(user.Password))
 	if err != nil {
 		return "", errors.New("password incorrect")
 	}
@@ -80,11 +83,11 @@ func (s *AuthService) ParseToken(accessToken string) (int64, error) {
 	return claims.UserId, nil
 }
 
-func generatePasswordHash(password []byte) ([]byte, error) {
-	hash, err := bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
+func generatePasswordHash(password string) (string, error) {
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
-		return nil, errors.New("invalid bcrypt hash generation")
+		return "", errors.New("invalid bcrypt hash generation")
 	}
 
-	return hash, nil
+	return string(hash), nil
 }

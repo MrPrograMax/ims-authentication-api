@@ -2,9 +2,9 @@ package models
 
 type User struct {
 	Id       int64  `json:"-"`
-	Login    string `json:"username" binding:"required" db:"login"`
-	Password []byte `json:"password" binding:"required" db:"password"`
-	Role     int64  `json:"role" binding:"required" db:"role_id"`
+	Login    string `json:"login" binding:"required" db:"login"`
+	Password string `json:"password" binding:"required" db:"password"`
+	RoleId   int64  `json:"role_id" binding:"required" db:"role_id"`
 }
 
 type Role struct {
