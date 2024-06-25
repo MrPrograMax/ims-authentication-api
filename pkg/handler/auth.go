@@ -2,12 +2,13 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
-	"ims-authentication-api/models"
+	"ims-authentication-api/model"
 	"net/http"
 )
 
 func (h *Handler) signUp(c *gin.Context) {
-	var input models.User
+	//logrus.Println(c.Request.Method, " ", c.FullPath())
+	var input model.User
 
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
@@ -26,7 +27,7 @@ func (h *Handler) signUp(c *gin.Context) {
 }
 
 type signInInput struct {
-	Username string `json:"username" binding:"required"`
+	Username string `json:"login" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 

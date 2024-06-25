@@ -2,12 +2,12 @@ package repository
 
 import (
 	"github.com/jmoiron/sqlx"
-	"ims-authentication-api/models"
+	"ims-authentication-api/model"
 )
 
 type Authorization interface {
-	CreateUser(user models.User) (int64, error)
-	GetUser(login string) (models.User, error)
+	CreateUser(user model.User) (int64, error)
+	GetUser(login string) (model.User, error)
 }
 
 type Repository struct {

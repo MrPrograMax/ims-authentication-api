@@ -1,7 +1,7 @@
 package service
 
 import (
-	"ims-authentication-api/models"
+	"ims-authentication-api/model"
 	"ims-authentication-api/pkg/repository"
 )
 
@@ -9,7 +9,7 @@ type Entity struct {
 }
 
 type Authorization interface {
-	CreateUser(user models.User) (int64, error)
+	CreateUser(user model.User) (int64, error)
 	GenerateToken(username, password string) (string, error)
 	ParseToken(token string) (int64, error)
 }

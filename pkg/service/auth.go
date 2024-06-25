@@ -3,9 +3,8 @@ package service
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
-	"ims-authentication-api/models"
+	"ims-authentication-api/model"
 	"ims-authentication-api/pkg/repository"
 	"time"
 )
@@ -28,15 +27,13 @@ func NewAuthService(repo repository.Authorization) *AuthService {
 	return &AuthService{repo: repo}
 }
 
-func (s *AuthService) CreateUser(user models.User) (int64, error) {
+func (s *AuthService) CreateUser(user model.User) (int64, error) {
 	hash, err := generatePasswordHash(user.Password)
 	if err != nil {
 		return 0, err
 	}
 
-	logrus.Println(user.Password)
 	user.Password = hash
-	logrus.Println(user.Password)
 
 	return s.repo.CreateUser(user)
 }

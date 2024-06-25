@@ -2,7 +2,7 @@ package repository
 
 import (
 	"github.com/jmoiron/sqlx"
-	"ims-authentication-api/models"
+	"ims-authentication-api/model"
 )
 
 type AuthPostgres struct {
@@ -13,7 +13,7 @@ func NewAuthPostgres(db *sqlx.DB) *AuthPostgres {
 	return &AuthPostgres{db: db}
 }
 
-func (r *AuthPostgres) CreateUser(user models.User) (int64, error) {
+func (r *AuthPostgres) CreateUser(user model.User) (int64, error) {
 	var id int64
 	insertQuery := "INSERT INTO users (login, password, role_id) VALUES ($1, $2, $3) RETURNING id"
 
@@ -25,8 +25,8 @@ func (r *AuthPostgres) CreateUser(user models.User) (int64, error) {
 	return id, nil
 }
 
-func (r *AuthPostgres) GetUser(login string) (models.User, error) {
-	var user models.User
+func (r *AuthPostgres) GetUser(login string) (model.User, error) {
+	var user model.User
 
 	query := "SELECT login, password, role_id FROM users WHERE login = $1"
 	err := r.db.Get(&user, query, login)
