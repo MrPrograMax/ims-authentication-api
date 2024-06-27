@@ -53,16 +53,16 @@
 }
 ```
 
-## Для подъема бд и запуска сервера:
+# Для подъема бд и запуска сервера:
 ```cmd
 make build
 make run
 ```
-## Для добавления миграций в бд: 
+# Для добавления миграций в бд: 
 ```cmd
 make migrate
 ```
-# Замечание 1: Требуется зависимость make. Для установки:
+## Замечание 1: Требуется зависимость make. Для установки:
 Запускаете PowerShell от имени администратора
 ```cmd
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
@@ -70,13 +70,13 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 choco install make
 ```
-# Замечание 2: Требуется зависимость migrate. Для установки:
+## Замечание 2: Требуется зависимость migrate. Для установки:
 ```cmd
 irm get.scoop.sh | iex
 scoop install migrate
 ```
-## Альтернативный способ запуска:
-# Замечатние 3: Нужно самому создать и прописать файл .env:
+# Альтернативный способ запуска:
+## Замечатние 3: Нужно самому создать и прописать файл .env:
 ```yaml
 db.host:http://localhost
 db.port:8080
