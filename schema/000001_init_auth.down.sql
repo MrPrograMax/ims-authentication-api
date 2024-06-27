@@ -1,4 +1,4 @@
-DROP TABLE users;
+DROP TABLE user;
 
-DROP TABLE roles;
+DROP TABLE role;
 

@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"github.com/jmoiron/sqlx"
 	"ims-authentication-api/model"
 )
@@ -15,7 +16,7 @@ func NewAuthPostgres(db *sqlx.DB) *AuthPostgres {
 
 func (r *AuthPostgres) CreateUser(user model.User) (int64, error) {
 	var id int64
-	insertQuery := "INSERT INTO user (full_name, login, password, role_id) VALUES ($1, $2, $3) RETURNING id"
+	insertQuery := fmt.Sprintf(`INSERT INTO %s (full_name, login, password, role_id) VALUES ($1, $2, $3) RETURNING id`, user.Login)
 
 	row := r.db.QueryRow(insertQuery, user.Login, user.Password, user.RoleId)
 	if err := row.Scan(&id); err != nil {
@@ -28,7 +29,7 @@ func (r *AuthPostgres) CreateUser(user model.User) (int64, error) {
 func (r *AuthPostgres) GetUser(login string) (model.User, error) {
 	var user model.User
 
-	query := "SELECT full_name, login, password, role_id FROM user WHERE login = $1"
+	query := fmt.Sprintf(`SELECT full_name, login, password, role_id FROM %s WHERE login = $1`, userTable)
 	err := r.db.Get(&user, query, login)
 
 	return user, err
