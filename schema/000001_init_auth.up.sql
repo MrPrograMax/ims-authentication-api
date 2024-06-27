@@ -1,10 +1,10 @@
-CREATE TABLE roles
+CREATE TABLE role
 (
     id          serial      not null unique primary key,
     name       varchar(255) not null
 );
 
-CREATE TABLE users
+CREATE TABLE "user"
 (
     id            serial       not null unique primary key,
     login         varchar(255) not null unique,
@@ -13,12 +13,10 @@ CREATE TABLE users
 
     CONSTRAINT fk_role
         FOREIGN KEY (role_id)
-            REFERENCES roles(id)
+            REFERENCES role(id)
 );
 
-INSERT INTO roles (name) VALUES ('admin');
-INSERT INTO roles (name) VALUES ('manager');
-INSERT INTO roles (name) VALUES ('worker');
-
-
+INSERT INTO role  (name) VALUES ('admin');
+INSERT INTO role (name) VALUES ('manager');
+INSERT INTO role (name) VALUES ('worker');
 
