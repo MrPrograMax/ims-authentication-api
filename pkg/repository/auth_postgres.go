@@ -28,7 +28,7 @@ func (r *AuthPostgres) CreateUser(user model.User) (int64, error) {
 func (r *AuthPostgres) GetUser(login string) (model.User, error) {
 	var user model.User
 
-	query := "SELECT full_name, login, password, role_id FROM users WHERE login = $1"
+	query := "SELECT full_name, login, password, role_id FROM user WHERE login = $1"
 	err := r.db.Get(&user, query, login)
 
 	return user, err
