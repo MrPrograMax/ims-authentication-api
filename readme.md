@@ -52,3 +52,16 @@
   "message": "invalid request"
 }
 ```
+
+Для запуска сервера выполнить следующие действия:
+
+
+1. docker pull postgres
+2. docker run —name=ims-auth-db -e POSTGRES_PASSWORD='qwerty' -p 5432:5432 —rm postgres
+3. migrate -path ./schema 'postgres:qwerty@localhost:5432/postgres?sslmode=disable' up
+
+Замечание: в у вас может не быть утилиты migrate. Тогда в этом случае перед пунктом 3 выполнить шаг:
+
+a. irm get.scoop.sh | iex
+b. scoop install migrate
+
