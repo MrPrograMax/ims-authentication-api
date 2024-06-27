@@ -78,17 +78,16 @@ scoop install migrate
 # Альтернативный способ запуска:
 ## Замечатние 3: Нужно самому создать и прописать файл .env:
 ```yaml
-db.host:http://localhost
-db.port:8080
-db.username:postgres
-db.dbname:ims-db
-db.sslmode:false
 DB_PASSWORD:qwerty
 ```
 Запуск:
 ```cmd
 docker pull postgres
 docker run --name=ims-auth-db -e POSTGRES_PASSWORD='qwerty' -p 5432:5432 --rm postgres
-migrate -path ./schema 'postgres:qwerty@localhost:5432/postgres?sslmode=disable' up
+migrate -path ./schema -database 'postgres://postgres:qwerty@0.0.0.0:5432/postgres?sslmode=disable' up
 go run cmd/main.go
+```
+Для входа в postgres
+```cmd
+docker exec -it ims-auth-db psql -U postgres
 ```
