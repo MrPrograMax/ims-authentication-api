@@ -63,14 +63,17 @@ make run
 make migrate
 ```
 # Замечание 1: Требуется зависимость make. Для установки:
-1. Запускаете PowerShell от имени администратора
-2. Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-3. choco install make
+Запускаете PowerShell от имени администратора
+```cmd
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
+choco install make
+```
 # Замечание 2: Требуется зависимость migrate. Для установки:
-1. irm get.scoop.sh | iex
-2. scoop install migrate
-
+```cmd
+irm get.scoop.sh | iex
+scoop install migrate
+```
 ## Альтернативный способ запуска:
 # Замечатние 3: Нужно самому создать и прописать файл .env:
 ```yaml
