@@ -33,6 +33,7 @@
 
 ```json
 {
+  "fullname": "Linus Torwalds"
   "username": "name",
   "password": "password",
   "role_id": 1
