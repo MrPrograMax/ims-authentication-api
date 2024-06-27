@@ -41,7 +41,7 @@ func (s *AuthService) CreateUser(user model.User) (int64, error) {
 func (s *AuthService) GenerateToken(username, password string) (string, error) {
 	user, err := s.repo.GetUser(username)
 	if err != nil {
-		return "", err
+		return "", errors.New("user already exists")
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
