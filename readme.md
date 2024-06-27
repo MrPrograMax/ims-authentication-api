@@ -53,15 +53,16 @@
 }
 ```
 
-Для запуска сервера выполнить следующие действия:
+Для подъем бд и запуск сервера:
+1. make build
+2. make run
 
+Для добавления миграций в бд:
+3. make migrate
 
-1. docker pull postgres
-2. docker run —name=ims-auth-db -e POSTGRES_PASSWORD='qwerty' -p 5432:5432 —rm postgres
-3. migrate -path ./schema 'postgres:qwerty@localhost:5432/postgres?sslmode=disable' up
+Зачание: у вас может не быть утилиты для использования make. Тогда:
+1. Запускаете PowerShell от имени администратора
+2. Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+3. choco install make
 
-Замечание: в у вас может не быть утилиты migrate. Тогда в этом случае перед пунктом 3 выполнить шаг:
-
-a. irm get.scoop.sh | iex
-b. scoop install migrate
 
