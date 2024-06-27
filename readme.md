@@ -53,24 +53,26 @@
 }
 ```
 
-Для подъем бд и запуск сервера:
-1. `make build`
-2. `make run`
-
-Для добавления миграций в бд: 
-`make migrate`
-
-Замечание 1: Требуется зависимость make. Для установки:
+## Для подъема бд и запуска сервера:
+```cmd
+make build
+make run
+```
+## Для добавления миграций в бд: 
+```cmd
+make migrate
+```
+# Замечание 1: Требуется зависимость make. Для установки:
 1. Запускаете PowerShell от имени администратора
 2. Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 3. choco install make
 
-Замечание 2: Требуется зависимость migrate. Для установки:
+# Замечание 2: Требуется зависимость migrate. Для установки:
 1. irm get.scoop.sh | iex
 2. scoop install migrate
 
-Альтернативный способ запуска:
-Замечатние 3: Нужно самому создать и прописать файл .env:
+## Альтернативный способ запуска:
+# Замечатние 3: Нужно самому создать и прописать файл .env:
 ```yaml
 db.host:http://localhost
 db.port:8080
@@ -85,4 +87,4 @@ docker pull postgres
 docker run --name=ims-auth-db -e POSTGRES_PASSWORD='qwerty' -p 5432:5432 --rm postgres
 migrate -path ./schema 'postgres:qwerty@localhost:5432/postgres?sslmode=disable' up
 go run cmd/main.go
-'''
+```
