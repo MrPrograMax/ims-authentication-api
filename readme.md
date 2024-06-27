@@ -54,15 +54,20 @@
 ```
 
 Для подъем бд и запуск сервера:
-1. make build
-2. make run
+1. `make build`
+2. `make run`
 
-Для добавления миграций в бд:
-3. make migrate
+Для добавления миграций в бд: 
+`make migrate`
 
-Зачание: у вас может не быть утилиты для использования make. Тогда:
+Зачание: У вас может не быть утилиты для использования make. Тогда:
 1. Запускаете PowerShell от имени администратора
 2. Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 3. choco install make
+
+Замечание. У вас может не быть утилиты migrate. Тогда:
+1. irm get.scoop.sh | iex
+2. scoop install migrate
+
 
 
