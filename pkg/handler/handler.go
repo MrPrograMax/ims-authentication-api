@@ -18,7 +18,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	auth := router.Group("/auth") // localhost:8080/auth/sign-up
 	{
-		auth.POST("/sign-up", h.signUp)
+		auth.POST("/sign-up", h.userIdentity, h.signUp)
 		auth.POST("/sign-in", h.signIn)
 	}
 
