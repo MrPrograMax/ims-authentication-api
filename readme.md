@@ -84,7 +84,7 @@ DB_PASSWORD:qwerty
 Запуск:
 ```cmd
 docker pull postgres
-docker run --name=ims-auth-db -e POSTGRES_PASSWORD='qwerty' -p 5432:5432 --rm postgres
+docker run --name=ims-database -e POSTGRES_PASSWORD='qwerty' -p 5432:5432 --rm postgres
 migrate -path ./schema -database 'postgres://postgres:qwerty@0.0.0.0:5432/postgres?sslmode=disable' up
 go run cmd/main.go
 ```
