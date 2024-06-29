@@ -45,7 +45,15 @@ func (h *Handler) signIn(c *gin.Context) {
 		return
 	}
 
+	user, err := h.services.GetUser(input.Username)
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"token": token,
+		"user_id": user.Id,
+		"role_id": user.RoleId,
+		"token":   token,
 	})
 }

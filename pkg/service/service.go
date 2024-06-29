@@ -12,6 +12,7 @@ type Authorization interface {
 	CreateUser(user model.User) (int64, error)
 	GenerateToken(username, password string) (string, error)
 	ParseToken(token string) (int64, error)
+	GetUser(login string) (model.User, error)
 }
 
 type Services struct {

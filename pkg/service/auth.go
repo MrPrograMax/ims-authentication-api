@@ -88,3 +88,7 @@ func generatePasswordHash(password string) (string, error) {
 
 	return string(hash), nil
 }
+
+func (s *AuthService) GetUser(login string) (model.User, error) {
+	return s.repo.GetUser(login)
+}
